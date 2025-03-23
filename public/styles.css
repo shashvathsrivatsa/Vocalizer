@@ -1,0 +1,144 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Added to stack content vertically */
+}
+
+canvas {
+  position: absolute;
+}
+
+video {
+    display: none; /* Initially hidden */
+    max-width: 100%; /* Ensure it is responsive */
+    border-radius: 10px;
+}
+
+.progress-container {
+  width: 80%;
+  max-width: 600px;
+  height: 12px;
+  background-color: #e1e4e8;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(to right, #007aff, #5ac8fa);
+  border-radius: 10px;
+  animation: progress 4s ease-in-out forwards, hideProgressBar 0s 4s forwards;
+}
+
+@keyframes progress {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes hideProgressBar {
+  0% {
+    display: block;
+  }
+  100% {
+    display: none;
+  }
+}
+
+/* Switches container styles */
+.switches-container {
+    display: none;
+    position: absolute;
+    bottom: 30px;
+    justify-content: center;
+    gap: 20px; /* Space between switches */
+    transform: translateY(200%);
+}
+
+/* Style for each switch */
+.switch {
+  position: relative;
+  /* display: inline-block; */
+  width: 60px;
+  height: 34px;
+  margin: 0 30px 0 50px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #007aff; /* Blue when active */
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px); /* Move the circle when checked */
+}
+
+/* Icons for feeling detection (star) and face mapping (user) */
+.slider i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-300%, -50%);
+  font-size: 18px;
+  color: white;
+  pointer-events: none;
+}
+
+#xyz {
+    transform: translate(-370%, -50%);
+}
+
+#feelingSwitch:checked + .slider i {
+  color: #ffd700; /* Gold color for the star when active */
+}
+
+#faceMappingSwitch:checked + .slider i {
+  color: #fff; /* White color for the face icon when active */
+}
+

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script defer src="face-api.min.js"></script>
+  <script defer src="script.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="progress-container">
+      <div class="progress-bar"></div>
+  </div>
+
+  <video id="video" width="720" height="560" autoplay muted playsinline></video>
+
+  <!-- Switches for feeling detection and face mapping -->
+  <div class="switches-container">
+    <label class="switch">
+      <input type="checkbox" id="feelingSwitch">
+      <span class="slider">
+        <i class="fa fa-star" aria-hidden="true"></i> <!-- Feeling detection icon -->
+      </span>
+    </label>
+    <label class="switch">
+      <input type="checkbox" id="faceMappingSwitch">
+      <span class="slider">
+        <i id="xyz" class="fa fa-user" aria-hidden="true"></i> <!-- Face mapping icon -->
+      </span>
+    </label>
+  </div>
+
+  <script>
+      window.onload = function() {
+          setTimeout(function() {
+              const progressBar = document.querySelector('.progress-container');
+              progressBar.style.display = 'none'; // Hide the progress bar
+              
+              const video = document.querySelector('#video');
+              video.style.display = 'inline-block'; // Show the video after 4 seconds
+
+              // Show the switches after 4 seconds
+              document.getElementById('feelingSwitch').checked = true;
+              document.getElementById('faceMappingSwitch').checked = true;
+
+              const switchesContainer = document.querySelector('.switches-container');
+              switchesContainer.style.display = 'flex'; // Show the switches container
+
+              // Add event listeners to the switches
+              function handleSwitchToggle(switchId, state) {
+                  console.log(`${switchId} is now ${state ? "ON" : "OFF"}`);
+                  // You can add any other logic here depending on the state of the switches
+                  if (switchId === "feelingSwitch") {
+                      // Handle the Feeling Switch state
+                      if (state) {
+                          console.log("Feeling detection is activated.");
+                      } else {
+                          console.log("Feeling detection is deactivated.");
+                      }
+                  } else if (switchId === "faceMappingSwitch") {
+                      // Handle the Face Mapping Switch state
+                      if (state) {
+                          console.log("Face mapping is activated.");
+                      } else {
+                          console.log("Face mapping is deactivated.");
+                      }
+                  }
+              }
+
+              // Add event listeners to the switches
+              document.getElementById("feelingSwitch").addEventListener("change", function() {
+                  handleSwitchToggle("feelingSwitch", this.checked);
+              });
+
+              document.getElementById("faceMappingSwitch").addEventListener("change", function() {
+                  handleSwitchToggle("faceMappingSwitch", this.checked);
+              });
+
+          }, 4000); // 4 seconds delay
+      };
+  </script>
+
+</body>
+</html>
+
